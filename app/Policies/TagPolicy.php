@@ -30,7 +30,7 @@ class TagPolicy
      */
     public function view(User $user, Tag $tag)
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -41,7 +41,7 @@ class TagPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag)
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -65,30 +65,6 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the tag.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Tag  $tag
-     * @return mixed
-     */
-    public function restore(User $user, Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the tag.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Tag  $tag
-     * @return mixed
-     */
-    public function forceDelete(User $user, Tag $tag)
-    {
-        //
+        return $user->id === 1;
     }
 }

@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Category::class);
-        // display a view of all of our categories
+
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
@@ -34,32 +34,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('viewAny', Category::class);
-        //validate
+        $this->authorize('create', Category::class);
+
         $attributes = $request->validate([
             'name' => 'required|max:255',
         ]);
 
-        //create and store
         Category::create($attributes);
 
-        //flash message
         session()->flash('successmessage', 'Created Category');
 
-        // redirect
         return redirect('/categories');
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -70,7 +55,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $this->authorize('viewAny', $category);
+        $this->authorize('update', $category);
         return view('categories.edit', compact('category'));
     }
 
@@ -83,7 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $this->authorize('viewAny', $category);
+        $this->authorize('update', $category);
         $attributes = $request->validate([
             'name' => 'required|max:255'
         ]);
@@ -104,7 +89,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->authorize('viewAny', $category);
+        $this->authorize('delete', $category);
         $category->delete();
         return redirect()->route('categories.index');
     }

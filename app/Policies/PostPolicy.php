@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -65,30 +65,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the post.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Post  $post
-     * @return mixed
-     */
-    public function restore(User $user, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the post.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Post  $post
-     * @return mixed
-     */
-    public function forceDelete(User $user, Post $post)
-    {
-        //
+        return $user->id === 1;
     }
 }

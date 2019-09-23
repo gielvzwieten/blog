@@ -33,19 +33,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('viewAny', Tag::class);
-        // Validate
+        $this->authorize('create', Tag::class);
+
         $attributes = $request->validate([
             'name' => 'required|max:255',
         ]);
 
-        // create
         Tag::create($attributes);
 
-        // session message
         session()->flash('successmessage', 'Created a Tag');
 
-        // redirect
         return redirect('/tags');
     }
 
@@ -57,7 +54,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $this->authorize('viewAny', $tag);
+        $this->authorize('view', $tag);
         return view('tags.show', compact('tag'));
     }
 
@@ -69,7 +66,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        $this->authorize('viewAny', $tag);
+        $this->authorize('update', $tag);
         return view('tags.edit', compact('tag'));
     }
 
@@ -82,19 +79,16 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        $this->authorize('viewAny', $tag);
-        // validate
+        $this->authorize('update', $tag);
+
         $attributes = $request->validate([
             'name' => 'required|max:255'
         ]);
 
-        //update
         $tag->update($attributes);
 
-        //session message
         session()->flash('successmessage', 'Tag Name Updated');
 
-        //redirect
         return redirect('/tags');
     }
 
@@ -106,7 +100,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $this->authorize('viewAny', $tag);
+        $this->authorize('delete', $tag);
         $tag->delete();
 
         session()->flash('successmessage', 'Tag deleted');
