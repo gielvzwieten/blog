@@ -24,7 +24,7 @@
     </div>
 
         <div class="comment-form">
-            <form method="post" action="/comments/{{ $post->id }}">
+            <form method="post" action="/comments">
                 @csrf
 
                 <input type="hidden" name="post_id" value="{{ $post->id }}">

@@ -31,7 +31,7 @@ Route::get('/blog', 'BlogController@index')->name('blog.index');
 Route::get('/blog/{post}/{slug}', 'BlogController@show')->name('blog.show');
 
 // Comments routes
-Route::post('comments/{post_id}', 'CommentsController@store')->middleware('auth');
+Route::post('/comments', 'CommentsController@store')->middleware('auth');
 
 
 Auth::routes();
