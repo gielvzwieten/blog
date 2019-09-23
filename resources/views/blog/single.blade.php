@@ -27,6 +27,8 @@
             <form method="post" action="/comments/{{ $post->id }}">
                 @csrf
 
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
+
                 <div class="row">
                     <div class="col-md-6">
                             <label for="name">Name</label>

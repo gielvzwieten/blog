@@ -10,6 +10,7 @@
             <hr>
             <form method="post" action="/posts">
                 @csrf
+
                 <div class="form-group">
                     <label for="title">Post Title</label>
                     <input class="form-control" type="text" id="title" name="title" placeholder="Title" value="{{old('title')}}">

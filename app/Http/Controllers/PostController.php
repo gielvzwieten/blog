@@ -50,24 +50,22 @@ class PostController extends Controller
     {
         $this->authorize('create', Post::class);
 
-        if (isset($request->category_id)) {
             $attributes = $request->validate([
                 'title'         => 'required|max:255',
                 'body'          => 'required',
-                'category_id'   => 'required|integer',
+                'category_id'   => 'nullable|exists:posts,id',
+                'tags'          => 'nullable|array',
             ]);
-        } else {
-            $attributes = $request->validate([
-                'title'         => 'required|max:255',
-                'body'          => 'required',
-            ]);
-        }
 
-        $attributes['category_id'] = $request->category_id;
         $attributes['user_id'] = auth()->id();
 
         // store in database and make many to many relation
-        Post::create($attributes)->tags()->sync($request->tags, false);
+        Post::create([
+            'title'         => $attributes['title'],
+            'body'          => $attributes['body'],
+            'category_id'   => $attributes['category_id'],
+            'user_id'       => $attributes['user_id']
+        ])->tags()->sync($request->tags, false);
 
         session()->flash('successmessage', 'Your created blog post has successfully been created');
 
@@ -115,10 +113,15 @@ class PostController extends Controller
         $attributes = $request->validate([
             'title'         => 'required|max:255',
             'body'          => 'required',
-            'category_id'   => 'sometimes|integer',
+            'category_id'   => 'nullable|exists:posts,id',
+            'tags'          => 'nullable|array',
         ]);
 
-        $post->update($attributes);
+        $post->update([
+            'title'         => $attributes['title'],
+            'body'          => $attributes['body'],
+            'category_id'   => $attributes['category_id']
+        ]);
 
         // adding data to database for the multiple select tags field. if there is nothing set it will set an empty array to the database.
         if (isset($request->tags)) {

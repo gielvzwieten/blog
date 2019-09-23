@@ -20,10 +20,8 @@ class CommentsController extends Controller
             'name'      => 'required|max:255',
             'email'     => 'required|email',
             'comment'   => 'required',
-            'post_id'   =>  'sometimes',
+            'post_id'   => 'required|exists:posts,id',
         ]);
-
-        $attributes['post_id'] = $request->post_id;
 
         Comment::create($attributes);
 
