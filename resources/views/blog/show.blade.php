@@ -6,7 +6,6 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>{{$post->title}}</h1>
             <p>{{$post->body}}</p>
-
         </div>
     </div>
 
@@ -17,7 +16,6 @@
                 <div class="comment">
                     <p><strong>Name:</strong> {{$comment->name}}</p>
                     <p><strong>Comment:</strong><br>{{$comment->comment}}</p><br>
-
                 </div>
             @endforeach
         </div>

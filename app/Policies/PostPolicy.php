@@ -18,7 +18,7 @@ class PostPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -65,6 +65,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 }

@@ -18,7 +18,7 @@ class TagPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -30,7 +30,7 @@ class TagPolicy
      */
     public function view(User $user, Tag $tag)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -41,7 +41,7 @@ class TagPolicy
      */
     public function create(User $user)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 
     /**
@@ -65,6 +65,6 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        return $user->id === 1;
+        return $user->role->role === 'admin';
     }
 }
