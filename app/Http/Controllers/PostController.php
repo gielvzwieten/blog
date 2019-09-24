@@ -53,7 +53,7 @@ class PostController extends Controller
             $attributes = $request->validate([
                 'title'         => 'required|max:255',
                 'body'          => 'required',
-                'category_id'   => 'nullable|exists:posts,id',
+                'category_id'   => 'nullable',
                 'tags'          => 'nullable|array',
             ]);
 
@@ -113,7 +113,7 @@ class PostController extends Controller
         $attributes = $request->validate([
             'title'         => 'required|max:255',
             'body'          => 'required',
-            'category_id'   => 'nullable|exists:posts,id',
+            'category_id'   => 'nullable',
             'tags'          => 'nullable|array',
         ]);
 
