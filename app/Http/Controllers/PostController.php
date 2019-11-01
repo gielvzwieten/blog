@@ -23,7 +23,10 @@ class PostController extends Controller
     {
         $this->authorize('viewAny', Post::class);
 
-        $posts = Post::orderBy('id', 'DESC')->paginate(5);
+        //$posts = Post::orderBy('id', 'DESC')->paginate(5);
+
+        $posts = Post::getAllPosts();
+
         return view('posts.index', compact('posts'));
     }
 
@@ -111,16 +114,16 @@ class PostController extends Controller
         $this->authorize('update', $post);
 
         $attributes = $request->validate([
-            'title'         => 'required|max:255',
-            'body'          => 'required',
-            'category_id'   => 'nullable',
-            'tags'          => 'nullable|array',
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'category_id' => 'nullable',
+            'tags' => 'nullable|array',
         ]);
 
         $post->update([
-            'title'         => $attributes['title'],
-            'body'          => $attributes['body'],
-            'category_id'   => $attributes['category_id']
+            'title' => $attributes['title'],
+            'body' => $attributes['body'],
+            'category_id' => $attributes['category_id']
         ]);
 
         // adding data to database for the multiple select tags field. if there is nothing set it will set an empty array to the database.
@@ -129,10 +132,6 @@ class PostController extends Controller
         } else {
             $post->tags()->sync(array());
         }
-
-        session()->flash('successmessage', 'Changes have been saved');
-
-        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**

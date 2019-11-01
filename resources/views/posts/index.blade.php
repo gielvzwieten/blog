@@ -2,15 +2,18 @@
 @section('title', 'Posts page')
 @section('content')
 <div class="row mt-3 mb-2">
-    <div class="col-md-10 align-self-end">
+    <div class="col-md-7 align-self-end">
         <h1 class="mb-0">All Posts</h1>
     </div>
-    
+
+    <div class="col-md-3 align-self-end">
+        @include('partials.filters._dropdown')
+    </div>
+
     <div class="col-md-2 align-self-end">
         <a href="/posts/create" class="btn btn-md btn-block btn-primary">Create New Post</a>
     </div>
     <div class="col-md-12 mb-4">
-
     </div>
 </div>
 
@@ -21,7 +24,7 @@
                 <th>#</th>
                 <th>Title</th>
                 <th>Body</th>
-                <th>Created At</th>
+                <th>Published</th>
                 <th></th>
             </thead>
 
@@ -38,8 +41,23 @@
             </tbody>
         </table>
         <div class="text-center">
-            {{ $posts->links() }}
+            {{ $posts->appends(request()->input())->links() }}
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(function(){
+            // bind change event to select
+            $('#sort').on('change', function () {
+                var url = $(this).val(); // get selected value
+                if (url) { // require a URL
+                    window.location = url; // redirect
+                }
+                return false;
+            });
+        });
+    </script>
 @endsection
